@@ -38,6 +38,6 @@ resource "aws_instance" "web" {
               #!/bin/bash
               apt update -y
               apt install -y nginx
-              echo "<h1>EC2 deployed by Terraform + GitHub Actions..</h1>" > /var/www/html/index.html
+              echo "<h1>EC2 deployed by Terraform + GitHub Actions...</h1>" > /var/www/html/index.html
               EOF
 }
