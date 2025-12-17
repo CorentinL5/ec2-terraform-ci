@@ -4,4 +4,4 @@
 *.pem
 .env
 
-.idea
+.idea/
