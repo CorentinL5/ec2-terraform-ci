@@ -1,14 +1,10 @@
-name: Terraform Apply
+name: Terraform Destroy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "terraform/**"
+  workflow_dispatch:
 
 jobs:
-  terraform:
+  destroy:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,23 +22,10 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
-      - name: Verify AWS identity (debug)
-        run: aws sts get-caller-identity
-
       - name: Terraform Init
         working-directory: terraform
         run: terraform init
 
-      - name: Terraform Apply
+      - name: Terraform Destroy
         working-directory: terraform
-        run: terraform apply -auto-approve
-
-      - name: Terraform Outputs (visible)
-        working-directory: terraform
-        run: terraform output
-
-      - name: Terraform Outputs Summary
-        working-directory: terraform
-        run: |
-          echo "## Terraform Outputs" >> $GITHUB_STEP_SUMMARY
-          terraform output | sed 's/^/- /' >> $GITHUB_STEP_SUMMARY
+        run: terraform destroy -auto-approve
