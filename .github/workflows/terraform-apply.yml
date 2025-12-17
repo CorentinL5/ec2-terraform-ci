@@ -7,6 +7,7 @@ on:
     paths:
       - "bootstrap/**"
       - "terraform/**"
+  workflow_dispatch:
 
 jobs:
   bootstrap:
